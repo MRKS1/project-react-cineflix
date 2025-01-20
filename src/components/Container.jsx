@@ -14,6 +14,6 @@ export default function Container() {
 }
 
 const Movies = styled.div`
-    height: 100vh;
+    min-height: 100vh;
     background-color: #212226;
 `;
