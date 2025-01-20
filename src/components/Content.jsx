@@ -3,10 +3,5 @@ import Title from './Title'
 import Movies from './Movies'
 
 export default function Content() {
-  return (
-    <>
-        <Title />
-        <Movies />
-    </>
-  )
+  return <Movies />
 }

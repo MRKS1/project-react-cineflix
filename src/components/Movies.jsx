@@ -16,6 +16,8 @@ export default function Movies() {
 
 
     return (
+        <>
+        <TitleBox>Em Cartaz</TitleBox>
         <List>
             {movieItem.map(item => (
                 <div key={item.id}>
@@ -23,8 +25,20 @@ export default function Movies() {
                 </div>
             ))}
         </List>
+        </>
     )
 }
+
+const TitleBox = styled.h1`
+    height: 78px;
+    color: white;
+    font-family: "Sarala", serif;
+    font-size: 24px;
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`
 
 const List = styled.div`
     display: flex;
