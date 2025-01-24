@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
 export default function Showtimes() {
     const [timeItem, setTimeItem] = useState([]);
 
     useEffect(() => {
-        const movieGet = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/[COLOCAR ID DO FILME]/showtimes")
+        const movieGet = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes")
 
         movieGet.then(
             (response) => setTimeItem(response.data.days))
@@ -23,14 +24,14 @@ export default function Showtimes() {
                         <Day>
                             <h2>{item.weekday}, {item.date}</h2>
                         </Day>
-                        <Hour>
+                        <Hours>
                             {item.showtimes.map(season => (
-                                <div key={season.id}>
+                                <Hour to="/seats" key={season.id}>
                                     <p>{season.name}</p>
-                                </div>
+                                </Hour>
                             ))}
 
-                        </Hour>
+                        </Hours>
                     </Time>
                 ))}
             </List>
@@ -79,15 +80,15 @@ const Day = styled.div`
     }
 `
 
-const Hour = styled.div`
+const Hours = styled.div`
     display: flex;
-
-    div {
+`
+const Hour = styled(Link)`
         height: 40px;
         width: 84px;
         color: #EE897F;
-
         display: flex;
+        text-decoration: none;
         justify-content: center;
         align-items: center;
         border: 2px solid;
@@ -95,8 +96,4 @@ const Hour = styled.div`
         border-color: #EE897F;
         margin-left: 25px;
         margin-bottom: 15px;
-
-    }
-
-
 `

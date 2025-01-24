@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components'
 
 export default function Movies() {
@@ -20,9 +21,9 @@ export default function Movies() {
         <TitleBox>Em Cartaz</TitleBox>
         <List>
             {movieItem.map(item => (
-                <div key={item.id}>
+                <Link to="/showtimes" key={item.id}>
                     <img src={item.posterURL} alt={item.title} />
-                </div>
+                </Link>
             ))}
         </List>
         </>

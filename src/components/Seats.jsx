@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import Form from './Form';
 
 export default function Seats() {
     const [seatsItem, setSeatsItem] = useState([]);
@@ -20,13 +21,16 @@ export default function Seats() {
   return (
     <>
         <TitleBox>Selecione o(s) assento(s)</TitleBox>
-        <List>
+        <Menu>
+            <Numbers>
             {seatsItem.map(item => (
-                <Choice key={item.id}>
+                <Number key={item.id}>
                     <p>{item.name}</p>
-                </Choice>
+                </Number>
             ))}
-        </List>
+            </Numbers>
+            <Form />
+        </Menu>
         </>
   )
 }
@@ -42,15 +46,11 @@ const TitleBox = styled.h1`
     align-items: center;
 `
 
-const List = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+const Menu = styled.div`
     margin: 15px;
 `
 
-const Choice = styled.h1`
+const Number = styled.div`
     height: 30px;
     width: 30px;
     font-family: "Sarala", serif;
@@ -66,4 +66,16 @@ const Choice = styled.h1`
     
 
 `
+
+const Numbers = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 35px;
+    border-bottom: 1px solid;
+    border-color: #4E5A65;
+
+`
+
 
