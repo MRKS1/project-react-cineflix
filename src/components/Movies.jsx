@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components'
 
-export default function Movies() {
+export default function Movies({ setMovie }) {
     const [movieItem, setMovieItem] = useState([]);
 
     useEffect(() => {
@@ -16,19 +16,27 @@ export default function Movies() {
     }, []);
 
 
+    function selection(props) {
+        setMovie([props])
+    };
+
+
     return (
         <>
-        <TitleBox>Em Cartaz</TitleBox>
-        <List>
-            {movieItem.map(item => (
-                <Link to="/showtimes" key={item.id}>
-                    <img src={item.posterURL} alt={item.title} />
-                </Link>
-            ))}
-        </List>
+            <TitleBox>Em Cartaz</TitleBox>
+            <List>
+                {movieItem.map(item => (
+                    <Link
+                        to={`/sessoes/${item.id}`}
+                        onClick={() => selection(item.title)}
+                        key={item.id}>
+                        <img src={item.posterURL} alt={item.title} />
+                    </Link>
+                ))}
+            </List>
         </>
     )
-}
+};
 
 const TitleBox = styled.h1`
     height: 78px;

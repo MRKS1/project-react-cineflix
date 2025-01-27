@@ -2,38 +2,35 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export default function Chekout() {
-    function fillInfo() {
-        alert("funcionou")
-    }
+export default function Chekout({ movie, season, date, seats, name, cpf }) {
 
     return (
         <>
             <TitleBox>Pedido finalizado!</TitleBox>
-            <Submit onSubmit={fillInfo}>
+            <Submit>
             <Info>
                 <div>
                     <h2>Filme e sessão</h2>
-                    <p>Filme</p>
-                    <p>horario</p>
+                    <p>{movie}</p>
+                    <p>{date} às {season}</p>
                 </div>
                 <div>
                     <h2>Ingressos</h2>
-                    <p>Assento 15</p>
+                    {seats.map(item => 
+                         <p key={item}>Assento {item}</p>
+                     )}
                 </div>
                 <div>
                     <h2>Comprador(a)</h2>
-                    <p>Nome</p>
-                    <p>CPF</p>
+                    <p>Nome: {name}</p>
+                    <p>CPF: {cpf[0]}{cpf[1]}{cpf[2]}.{cpf[3]}{cpf[4]}{cpf[5]}.{cpf[6]}{cpf[7]}{cpf[8]}-{cpf[9]}{cpf[10]}</p>
                 </div>
-
             </Info>
-            <FinalButton to="/" type="submit">Reservar assento(s)</FinalButton>
+            <FinalButton to="/" type="submit">Voltar para tela inicial</FinalButton>
             </Submit>
-
         </>
     )
-}
+};
 
 const TitleBox = styled.h1`
 height: 78px;
@@ -48,9 +45,11 @@ align-items: center;
 
 const Submit = styled.form`
     font-family: "Sarala", serif;
-   display: flex;
-   flex-direction: column;
-   margin: 20px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 `
 
 const FinalButton = styled(Link)`
@@ -66,8 +65,9 @@ const FinalButton = styled(Link)`
     background-color: #EE897F;
     border-radius: 8px;
     margin-top: 20px;
-`   
+    margin-bottom: 40px;
 
+`
 
 const Info = styled.div`
 min-height: 420px;
@@ -77,7 +77,6 @@ background-color: #2B2D36;
 color: white;
 padding: 18px;
 border-radius: 8px;
-
 h2 {
     font-size: 22px;
     font-weight: 700;
@@ -87,13 +86,8 @@ h2 {
     margin-top: 30px;
     border-bottom: 1px solid;
     border-color: #4E5A65;
-
 }
-
 p {
     margin-bottom: 15px;
 }
-
 `
-
-

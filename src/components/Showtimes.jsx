@@ -1,19 +1,27 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components'
 
-export default function Showtimes() {
+export default function Showtimes({ setSeason, setDate }) {
+    const { idMovie } = useParams();
     const [timeItem, setTimeItem] = useState([]);
 
     useEffect(() => {
-        const movieGet = axios.get("https://mock-api.driven.com.br/api/v8/cineflex/movies/1/showtimes")
+        const movieGet = axios.get(`https://mock-api.driven.com.br/api/v8/cineflex/movies/${idMovie}/showtimes`)
 
         movieGet.then(
             (response) => setTimeItem(response.data.days))
             .catch
             ((error) => console.log(error.response.data.days))
     }, []);
+
+
+    function selection(hour, date) {
+        setSeason([hour]);
+        setDate([date]);
+    };
+
 
     return (
         <>
@@ -26,7 +34,10 @@ export default function Showtimes() {
                         </Day>
                         <Hours>
                             {item.showtimes.map(season => (
-                                <Hour to="/seats" key={season.id}>
+                                <Hour
+                                    to={`/assentos/${season.id}`}
+                                    onClick={() => selection(season.name, item.date)}
+                                    key={season.id}>
                                     <p>{season.name}</p>
                                 </Hour>
                             ))}
@@ -37,7 +48,9 @@ export default function Showtimes() {
             </List>
         </>
     )
-}
+
+};
+
 
 const TitleBox = styled.h1`
     height: 78px;
@@ -73,8 +86,6 @@ const Day = styled.div`
     border-bottom: 1px solid;
     border-color: #4E5A65;
     margin: 20px;
-
-
     h2 {
         margin-bottom: 20px;
     }
@@ -83,6 +94,7 @@ const Day = styled.div`
 const Hours = styled.div`
     display: flex;
 `
+
 const Hour = styled(Link)`
         height: 40px;
         width: 84px;
