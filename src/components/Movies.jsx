@@ -20,7 +20,6 @@ export default function Movies({ setMovie }) {
         setMovie([props])
     };
 
-
     return (
         <>
             <TitleBox>Em Cartaz</TitleBox>
