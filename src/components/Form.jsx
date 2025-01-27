@@ -91,5 +91,4 @@ const Button = styled(Link)`
         background-color: #EE897F;
         border-radius: 8px;
         margin-top: 15px;
-
     `
